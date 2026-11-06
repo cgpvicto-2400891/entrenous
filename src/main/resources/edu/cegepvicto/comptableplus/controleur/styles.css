@@ -1,0 +1,51 @@
+.titreFenetre {
+    -fx-font-size: 18pt;
+    -fx-font-weight: bold;
+}
+
+.sous-titre {
+    -fx-text-fill: #555555;
+}
+
+.etiquette-champ {
+    -fx-font-weight: bold;
+}
+
+.indice {
+    -fx-font-style: italic;
+    -fx-text-fill: #555555;
+}
+
+.message-erreur {
+    -fx-text-fill: #b00020;
+}
+
+.erreur {
+    -fx-border-color: #b00020;
+    -fx-border-radius: 3;
+}
+
+.resume-client {
+    -fx-border-color: #999999;
+    -fx-border-style: dashed;
+    -fx-border-radius: 4;
+    -fx-padding: 8;
+}
+
+.bandeau-erreur {
+    -fx-background-color: #fdecea;
+    -fx-border-color: #b00020;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 8;
+}
+
+.valider {
+    -fx-background-color: #2e7d32;
+    -fx-text-fill: white;
+}
+
+.valider:disabled {
+    -fx-background-color: #b8c7b9;
+    -fx-text-fill: #f5f5f5;
+}

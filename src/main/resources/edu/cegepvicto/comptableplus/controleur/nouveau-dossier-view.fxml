@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_LEFT" spacing="12.0" xmlns:fx="http://javafx.com/fxml" stylesheets="@styles.css">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <Label styleClass="titreFenetre" text="Nouveau dossier client"/>
+
+    <!-- Erreur d'accès aux données : on propose de réessayer (exception 1a) -->
+    <HBox fx:id="bandeauErreur" alignment="CENTER_LEFT" spacing="10.0" styleClass="bandeau-erreur"
+          visible="false" managed="false">
+        <Label fx:id="messageBandeau" wrapText="true" styleClass="message-erreur" HBox.hgrow="ALWAYS"
+               maxWidth="Infinity"/>
+        <Button text="Réessayer" onAction="#reessayer"/>
+    </HBox>
+
+    <!-- Numéro, date d'ouverture et gestionnaire -->
+    <GridPane hgap="12.0" vgap="4.0">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="30.0"/>
+            <ColumnConstraints percentWidth="35.0"/>
+            <ColumnConstraints percentWidth="35.0"/>
+        </columnConstraints>
+        <Label GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="etiquette-champ"
+               text="N° de dossier (généré)"/>
+        <Label GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="etiquette-champ"
+               text="Date d'ouverture *"/>
+        <Label GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="etiquette-champ"
+               text="Gestionnaire responsable"/>
+        <TextField fx:id="champNumero" GridPane.columnIndex="0" GridPane.rowIndex="1" editable="false"
+                   focusTraversable="false" maxWidth="Infinity"/>
+        <DatePicker fx:id="choixDateOuverture" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                    promptText="aaaa-mm-jj" maxWidth="Infinity"/>
+        <TextField fx:id="champGestionnaire" GridPane.columnIndex="2" GridPane.rowIndex="1" editable="false"
+                   focusTraversable="false" maxWidth="Infinity"/>
+        <Label fx:id="erreurDateOuverture" GridPane.columnIndex="1" GridPane.rowIndex="2"
+               styleClass="message-erreur" wrapText="true"/>
+    </GridPane>
+
+    <!-- Client -->
+    <VBox spacing="4.0">
+        <Label styleClass="etiquette-champ" text="Client *"/>
+        <HBox spacing="10.0">
+            <TextField fx:id="champRechercheClient" promptText="Rechercher par nom (personne ou entreprise)…"
+                       HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+            <Button text="+ Nouveau client" onAction="#nouveauClient"/>
+        </HBox>
+        <Label fx:id="erreurClient" styleClass="message-erreur" wrapText="true"/>
+        <ListView fx:id="resultatsClients" prefHeight="110.0" visible="false" managed="false"/>
+        <Label fx:id="resumeClient" styleClass="resume-client" wrapText="true" maxWidth="Infinity"/>
+    </VBox>
+
+    <!-- Type de mandat et période visée -->
+    <HBox spacing="12.0" alignment="TOP_LEFT">
+        <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+            <Label styleClass="etiquette-champ" text="Type de mandat *"/>
+            <HBox spacing="10.0">
+                <ComboBox fx:id="choixTypeMandat" promptText="Sélectionner…" HBox.hgrow="ALWAYS"
+                          maxWidth="Infinity"/>
+                <Button fx:id="boutonAjouterMandat" text="+ Ajouter le mandat" onAction="#ajouterMandat"/>
+            </HBox>
+            <Label fx:id="indiceTypeMandat" styleClass="indice" wrapText="true"
+                   text="Choisir un client pour voir les mandats offerts à sa catégorie."/>
+            <Label fx:id="erreurTypeMandat" styleClass="message-erreur" wrapText="true"/>
+        </VBox>
+        <VBox spacing="4.0">
+            <Label styleClass="etiquette-champ" text="Période visée *"/>
+            <ComboBox fx:id="choixPeriodeVisee"/>
+            <Label fx:id="erreurPeriodeVisee" styleClass="message-erreur" wrapText="true"/>
+        </VBox>
+    </HBox>
+
+    <!-- Description -->
+    <VBox spacing="4.0">
+        <Label fx:id="etiquetteDescription" styleClass="etiquette-champ" text="Description du dossier"/>
+        <TextArea fx:id="zoneDescription" prefRowCount="5" wrapText="true"/>
+        <HBox spacing="10.0">
+            <Label fx:id="erreurDescription" styleClass="message-erreur" wrapText="true" HBox.hgrow="ALWAYS"
+                   maxWidth="Infinity"/>
+            <Label fx:id="compteurDescription" text="0 / 500"/>
+        </HBox>
+    </VBox>
+
+    <!-- Boutons -->
+    <HBox spacing="10.0" alignment="CENTER_LEFT">
+        <Button fx:id="boutonCreer" text="Créer le dossier" onAction="#creerDossier" styleClass="valider"
+                defaultButton="true"/>
+        <Button fx:id="boutonCreerTaches" text="Créer et ajouter des tâches" onAction="#creerEtAjouterTaches"/>
+        <Button fx:id="boutonCreerEmployes" text="Créer et ajouter des employés"
+                onAction="#creerEtAjouterEmployes"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Annuler" onAction="#annuler" cancelButton="true"/>
+    </HBox>
+
+    <Label styleClass="indice" wrapText="true"
+           text="* champ obligatoire — les messages d'erreur s'affichent sous le champ concerné."/>
+</VBox>
